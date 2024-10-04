@@ -1,6 +1,7 @@
 the problem statement is : given an array [1, -1 , 3, 5, 6 , 10], find arr[i]+arr[j] == 11
 
 ### approach 1 (Hash Table):
+```sh
 time O(n)
 space O(n)
 
@@ -10,8 +11,10 @@ space O(n)
     y = arr[i] + 11
  if hash_table[y] then return the result (arr[i], y)
  else push arr[i] into the hash_table
+ ```
 
 ### approach 2 (two pointer)
+```sh
  time O(nlogn)
  space O(1)
 
@@ -29,6 +32,6 @@ else if arr[left]+arr[right] > 11
     then right++
 
 if left >= right return false
-
+```
 
  
