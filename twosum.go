@@ -2,35 +2,33 @@ package main
 
 import "fmt"
 
-func AbsInt(x int) int {
-	if x < 0 {
-		return -x
+func winIdx(value int) int {
+	if value == 0 {
+		return 1
+	} else {
+		return 0
 	}
-	return x
 }
 
 func main() {
-	arr1 := []int{-7, -5, -4, 3, 6, 8, 9}
-	res := []int{0, 0, 0, 0, 0, 0, 0}
-
-	first := 0
-	last := len(arr1) - 1
-	resIndex := len(res) - 1
-
-	for {
-		if last < first {
-			break
-		}
-
-		if AbsInt(arr1[first]) < AbsInt(arr1[last]) {
-			res[resIndex] = AbsInt(arr1[last]) * AbsInt(arr1[last])
-			last--
-		} else {
-			res[resIndex] = AbsInt(arr1[first]) * AbsInt(arr1[first])
-			first++
-		}
-		resIndex--
+	arr := [3][2]string{
+		{"html", "c#"},
+		{"c#", "pyton"},
+		{"pyton", "c#"},
 	}
 
-	fmt.Println(res)
+	myMap := make(map[string]int)
+	score := []int{0, 0, 1}
+	bestTeam := ""
+	bestTeamScore := 0
+
+	for idx, value := range arr {
+		myMap[value[winIdx(score[idx])]] += 3
+		if myMap[value[winIdx(score[idx])]] > bestTeamScore {
+			bestTeamScore = myMap[value[winIdx(score[idx])]]
+			bestTeam = value[winIdx(score[idx])]
+		}
+	}
+
+	fmt.Println(bestTeam, bestTeamScore)
 }
