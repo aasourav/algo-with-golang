@@ -2,29 +2,35 @@ package main
 
 import "fmt"
 
-func main() {
-	arr1 := []int{5, 1, 22, 25, 6, -1, 8, 10}
-	arr2 := []int{1, 6, -1, 10}
+func AbsInt(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
 
-	arr1InitIndex := 0
-	arr2InitIndex := 0
+func main() {
+	arr1 := []int{-7, -5, -4, 3, 6, 8, 9}
+	res := []int{0, 0, 0, 0, 0, 0, 0}
+
+	first := 0
+	last := len(arr1) - 1
+	resIndex := len(res) - 1
 
 	for {
-		if len(arr1) <= arr1InitIndex || len(arr2) <= arr2InitIndex {
+		if last < first {
 			break
 		}
 
-		if arr1[arr1InitIndex] == arr2[arr2InitIndex] {
-			arr2InitIndex++
+		if AbsInt(arr1[first]) < AbsInt(arr1[last]) {
+			res[resIndex] = AbsInt(arr1[last]) * AbsInt(arr1[last])
+			last--
+		} else {
+			res[resIndex] = AbsInt(arr1[first]) * AbsInt(arr1[first])
+			first++
 		}
-
-		arr1InitIndex++
+		resIndex--
 	}
 
-	if len(arr2) == arr2InitIndex {
-		fmt.Println("Subsequence exist")
-	} else {
-		fmt.Println("No exist")
-
-	}
+	fmt.Println(res)
 }
