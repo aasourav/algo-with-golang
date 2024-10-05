@@ -2,29 +2,33 @@ package main
 
 import "fmt"
 
-func main() {
-	arr1 := []int{5, 1, 22, 25, 6, -1, 8, 10}
-	arr2 := []int{1, 6, -1, 10}
-
-	arr1InitIndex := 0
-	arr2InitIndex := 0
-
-	for {
-		if len(arr1) <= arr1InitIndex || len(arr2) <= arr2InitIndex {
-			break
-		}
-
-		if arr1[arr1InitIndex] == arr2[arr2InitIndex] {
-			arr2InitIndex++
-		}
-
-		arr1InitIndex++
-	}
-
-	if len(arr2) == arr2InitIndex {
-		fmt.Println("Subsequence exist")
+func winIdx(value int) int {
+	if value == 0 {
+		return 1
 	} else {
-		fmt.Println("No exist")
-
+		return 0
 	}
+}
+
+func main() {
+	arr := [3][2]string{
+		{"html", "c#"},
+		{"c#", "pyton"},
+		{"pyton", "c#"},
+	}
+
+	myMap := make(map[string]int)
+	score := []int{0, 0, 1}
+	bestTeam := ""
+	bestTeamScore := 0
+
+	for idx, value := range arr {
+		myMap[value[winIdx(score[idx])]] += 3
+		if myMap[value[winIdx(score[idx])]] > bestTeamScore {
+			bestTeamScore = myMap[value[winIdx(score[idx])]]
+			bestTeam = value[winIdx(score[idx])]
+		}
+	}
+
+	fmt.Println(bestTeam, bestTeamScore)
 }
